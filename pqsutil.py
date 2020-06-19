@@ -107,17 +107,19 @@ def get_answer(line):
 
 
 def chunk_file(string):
+    if not os.path.exists(f'data/{string}'):
+        os.makedirs(f'data/{string}')
     with open('data/{}.csv'.format(string), 'r', errors='ignore') as f:
         ff = csv.reader(f)
         cnt = 0
-        r = open('data/{}{:03d}.csv'.format(string, cnt), 'w', errors='ignore')
+        r = open('data/{}/{}{:03d}.csv'.format(string, string, cnt), 'w', errors='ignore')
         fr = csv.writer(r)
         for i, x in enumerate(ff):
             fr.writerow(x)
             if i % 20000 == 19999:
                 r.close()
                 cnt += 1
-                r = open('data/{}{:03d}.csv'.format(string, cnt), 'w', errors='ignore')
+                r = open('data/{}/{}{:03d}.csv'.format(string, string, cnt), 'w', errors='ignore')
                 fr = csv.writer(r)
         del ff, fr
         r.close()

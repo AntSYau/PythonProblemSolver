@@ -83,7 +83,8 @@ def init():
     kb.set_answers("data/Answers.csv", "cache/1", False)
     print("[{:.2f}] answers loaded".format(time.time() - ttime))
     kb.dump_answers('cache/kb_a')
-    
+    chunk_file('Questions')
+    chunk_file('Answers')
     return "finished. time: {:.2f} seconds.".format(time.time() - ttime)
 
 
