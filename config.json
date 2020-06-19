@@ -1,0 +1,1 @@
+{"version": 1, "questions_path": "data/Answers.csv", "answers_path": "data/Answers.csv", "bm25_k1": 1.5, "bm25_b": 0.75, "bm25_epsilon": 0.25}

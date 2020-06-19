@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Python Problem Solver</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div style="text-align: center;margin-bottom: 80px;margin-top: 120px;"><h1>
+                AI <i><b>Python</b></i> Problem Solver
+            </h1></div>
+            <form role="form" action="http://localhost:2345/" method="post">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group input-group-lg">
+                            {% if lbl %}
+                            <input class="form-control mr-sm-2" type="text" id="query" name="query"
+                                   placeholder="Type your query here..." value="{{lbl}}"/>
+                            {% else %}
+                            <input class="form-control mr-sm-2" type="text" id="query" name="query"
+                                   placeholder="Type your query here..."/>
+                            {% endif %}
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-outline-success btn-rounded btn-sm my-0">Search!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br/>
+            {% if tabs %}
+            <div class="tabbable" id="main">
+                <ul class="nav nav-tabs">
+                    {% for tab in tabs %}
+                    <li>
+                        <a href="#{{tab.href}}" data-toggle="tab">{{tab.name}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="tab-content">
+                    {% for content in contents %}
+                    <div class="tab-pane" id="{{content.href}}">
+                        <div class="tabbable" style="margin: 10px">
+                            <ul class="nav nav-tabs">
+                                {% for tab in content.tabs %}
+                                <li>
+                                    <a href="#{{tab.href}}" data-toggle="tab">{{tab.name}}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="tab-content">
+                                {% for item in content.item %}
+                                <div class="tab-pane" id="{{item.href}}" style="margin: 10px">
+                                    {{ item.text|safe }}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px">Time spent: {{ ttime }} seconds</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
